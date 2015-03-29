@@ -13,9 +13,11 @@ class ManyRenameTestCase(grass.gunittest.TestCase):
         cls.use_temp_region()
         cls.runModule("g.region", s=0, n=5, w=0, e=5, res=1)
 
+        # this must be in sync with the csv file
         cls.runModule("r.mapcalc", expression="lidar_259 = 1")
         cls.runModule("r.mapcalc", expression="schools_in_county = 1.0")
         cls.runModule("r.mapcalc", expression="fire = 1.f")
+        # including these for the case something fails
         cls.to_remove = ['lidar_259', 'schools_in_county', 'fire']
 
     @classmethod
@@ -26,9 +28,11 @@ class ManyRenameTestCase(grass.gunittest.TestCase):
 
     def test_raster(self):
         """Test that raster rename works"""
-        module = SimpleModule('g.rename.many', rast='data/names.csv')
+        module = SimpleModule('g.rename.many', raster='data/names.csv')
         self.assertModule(module)
-        new_names = ['my_special_elevation', 'my_special_schools', 'my_special_fires']
+        # this must be in sync with the csv file
+        new_names = ['my_special_elevation', 'my_special_schools',
+                     'my_special_fires']
         self.to_remove.extend(new_names)
         for name in new_names:
             self.assertRasterExists(name)
