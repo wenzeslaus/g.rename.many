@@ -1,10 +1,11 @@
-"""g.remove.many tests"""
+"""g.rename.many tests"""
 
-import grass.gunittest
+from grass.gunittest.case import TestCase
+from grass.gunittest.main import test
 from grass.gunittest.gmodules import SimpleModule
 
 
-class ManyRenameTestCase(grass.gunittest.TestCase):
+class ManyRenameTestCase(TestCase):
     """Test wrong input of parameters for g.list module"""
 
     @classmethod
@@ -39,4 +40,4 @@ class ManyRenameTestCase(grass.gunittest.TestCase):
 
 
 if __name__ == '__main__':
-    grass.gunittest.test()
+    test()

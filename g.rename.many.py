@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 ############################################################################
 #
-# MODULE:       g.rename.multi
-# AUTHOR(S):    Vaclav Petras (wenzeslaus gmail.com)
-# PURPOSE:      Wrapper for g.rename
-# COPYRIGHT:    (C) 2014 by authors above, and the GRASS Development Team
+# MODULE:       g.rename.many
+# AUTHOR(S):    Vaclav Petras <wenzeslaus gmail com>
+# PURPOSE:      Rename multiple maps using g.rename
+# COPYRIGHT:    (C) 2014-2015 by the authors above, and the GRASS Development Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,9 @@
 
 #%module
 #% description: Renames maps in the current mapset
-#% keywords: general, map management, rename
+#% keyword: general
+#% keyword: map management
+#% keyword: rename
 #%end
 
 #%option G_OPT_F_INPUT
@@ -37,7 +39,7 @@
 #% key: raster_3d
 #% required: no
 #% multiple: no
-#% label: File with rasters to be renamed
+#% label: File with 3D rasters to be renamed
 #% description: Format of the file is one raster map per line. Old name first, new name second (separated by comma by default)
 #% guisection: Raster
 #%end
@@ -57,14 +59,14 @@
 
 #%flag
 #% key: s
-#% label: Skip format checks
+#% label: Skip file format and map existence checks
 #% description: By default a file format check is performed and existence of map is checked before the actual renaming. This requires going through each file two times. It might be advantageous to disable the checks for renames of large number of maps. However, when this flag is used an error occurs, some maps might be renamed while some others not.
 #%end
 
 #%flag
 #% key: d
 #% label: Do the checks only (dry run)
-#% description: This will only perform the checks but it will not do the actual rename. This is useful when writing the file with renames.
+#% description: This will only perform the file format and map existence checks but it will not do the actual rename. This is useful when writing the file with renames.
 #%end
 
 #%rules
@@ -78,6 +80,10 @@ import sys
 from grass.script.utils import parse_key_val, separator
 from grass.script import core as gcore
 from grass.script.core import start_command, read_command, PIPE
+
+# TODO: move some functions to the library if they prove useful
+# TODO: create tests for error cases and dry run
+# TODO: support text delimiter in CSV at least in some basic way
 
 
 # there is a same function in gunittest.gutils
