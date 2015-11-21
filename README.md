@@ -3,8 +3,10 @@ g.rename.many
 
 This is a GRASS GIS module to rename multiple maps as specified in a file.
 
-This code will be moved to GRASS GIS addons once it is it clear what is
-the functionality it should cover.
+This code was moved to GRASS GIS addons:
+* https://trac.osgeo.org/grass/browser/grass-addons/grass7/general/g.rename.many
+* https://svn.osgeo.org/grass/grass-addons/grass7/general/g.rename.many/
+* https://grass.osgeo.org/grass70/manuals/addons/g.rename.many.html
 
 License
 -------
